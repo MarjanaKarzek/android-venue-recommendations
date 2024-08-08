@@ -5,8 +5,10 @@ import com.karzek.core.error.ErrorEntityFactory
 import com.karzek.core.mapper.Mapper
 import com.karzek.core.result.Result
 import com.karzek.core.result.safeApiCall
-import com.karzek.restaurants.data.RestaurantPageDTO.VenueSectionItemDTO
-import com.karzek.restaurants.data.RestaurantPageDTO.VenuesSectionDTO
+import com.karzek.restaurants.data.api.NAME_SECTION_VENUES
+import com.karzek.restaurants.data.api.RestaurantPageDTO.VenueSectionItemDTO
+import com.karzek.restaurants.data.api.RestaurantPageDTO.VenuesSectionDTO
+import com.karzek.restaurants.data.api.RestaurantsApi
 import com.karzek.restaurants.domain.Restaurant
 import com.karzek.restaurants.domain.RestaurantRepository
 

@@ -1,8 +1,8 @@
-package com.karzek.restaurants.data
+package com.karzek.restaurants.data.api
 
-import com.karzek.restaurants.data.RestaurantPageDTO.CategoriesSectionDTO
-import com.karzek.restaurants.data.RestaurantPageDTO.SectionDTO
-import com.karzek.restaurants.data.RestaurantPageDTO.VenuesSectionDTO
+import com.karzek.restaurants.data.api.RestaurantPageDTO.CategoriesSectionDTO
+import com.karzek.restaurants.data.api.RestaurantPageDTO.SectionDTO
+import com.karzek.restaurants.data.api.RestaurantPageDTO.VenuesSectionDTO
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 
 val sectionJsonParser: PolymorphicJsonAdapterFactory<SectionDTO> =

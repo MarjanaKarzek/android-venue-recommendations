@@ -1,4 +1,4 @@
-package com.karzek.restaurants.data
+package com.karzek.restaurants.data.api
 
 import retrofit2.http.GET
 import retrofit2.http.Query

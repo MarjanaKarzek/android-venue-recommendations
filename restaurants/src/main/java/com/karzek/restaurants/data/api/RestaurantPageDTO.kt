@@ -1,4 +1,4 @@
-package com.karzek.restaurants.data
+package com.karzek.restaurants.data.api
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
