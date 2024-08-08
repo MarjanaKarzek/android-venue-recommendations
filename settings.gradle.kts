@@ -21,5 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Venue Recommendations"
 include(":app")
-include(":venues")
+include(":restaurants")
 include(":core")

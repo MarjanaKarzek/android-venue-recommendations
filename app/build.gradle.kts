@@ -51,7 +51,7 @@ android {
 
 dependencies {
   implementation(project(":core"))
-  implementation(project(":venues"))
+  implementation(project(":restaurants"))
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -64,11 +64,17 @@ dependencies {
   implementation(platform(libs.koin.bom))
   implementation(libs.koin.core)
   implementation(libs.koin.android)
+  implementation(libs.moshi)
+  implementation(libs.moshi.adapters)
+  implementation(libs.moshi.kotlin)
+
   testImplementation(libs.junit)
+
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.ui.test.junit4)
+
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 }
