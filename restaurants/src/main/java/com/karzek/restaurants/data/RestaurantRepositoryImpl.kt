@@ -21,8 +21,9 @@ class RestaurantRepositoryImpl(
   private val errorEntityFactory: ErrorEntityFactory,
 ) : RestaurantRepository {
   override suspend fun getRestaurants(
-    latitude: Double,
-    longitude: Double
+    latitude: String,
+    longitude: String,
+    limit:Int,
   ): Result<List<Restaurant>> {
     return safeApiCall(
       coroutineContext = dispatcher.io,
@@ -34,8 +35,8 @@ class RestaurantRepositoryImpl(
       ).sections.find { it.name == NAME_SECTION_VENUES } as? VenuesSectionDTO
 
       checkNotNull(section) { throw VenueSectionNotFound() }
-      val restaurants = section.items.map { mapper.convert(it) }
-      check(restaurants.isEmpty()) { throw RestaurantsNotFound() }
+      val restaurants = section.items.take(limit).map { mapper.convert(it) }
+      check(restaurants.isNotEmpty()) { throw RestaurantsNotFound() }
       restaurants
     }
   }

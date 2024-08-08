@@ -41,6 +41,6 @@ data class RestaurantPageDTO(
   data class VenueDTO(
     @Json(name = "id") val id: String,
     @Json(name = "name") val name: String,
-    @Json(name = "short_description") val shortDescription: String,
+    @Json(name = "short_description") val shortDescription: String?,
   )
 }

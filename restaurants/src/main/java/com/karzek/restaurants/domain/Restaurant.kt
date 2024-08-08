@@ -4,6 +4,6 @@ package com.karzek.restaurants.domain
 data class Restaurant(
   val id: String,
   val name: String,
-  val shortDescription: String,
+  val shortDescription: String?,
   val imageUrl: String,
 )

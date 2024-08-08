@@ -5,10 +5,12 @@ import com.karzek.core.di.mapper
 import com.karzek.core.error.ComposedErrorEntityFactory
 import com.karzek.core.network.NetworkErrorEntityFactory
 import com.karzek.restaurants.data.RestaurantRepositoryImpl
+import com.karzek.restaurants.data.api.RestaurantsApi
+import com.karzek.restaurants.data.error.RestaurantsErrorEntityFactory
 import com.karzek.restaurants.data.mapper.RestaurantMapper
 import com.karzek.restaurants.domain.RestaurantRepository
-import com.karzek.restaurants.data.error.RestaurantsErrorEntityFactory
 import org.koin.dsl.module
+import retrofit2.Retrofit
 
 val restaurantsModule = module {
   single<RestaurantRepository> {
@@ -21,6 +23,8 @@ val restaurantsModule = module {
   }
 
   mapper { RestaurantMapper() }
+
+  single<RestaurantsApi> { get<Retrofit>().create(RestaurantsApi::class.java) }
 }
 
 private fun getErrorEntityFactory() = ComposedErrorEntityFactory(
