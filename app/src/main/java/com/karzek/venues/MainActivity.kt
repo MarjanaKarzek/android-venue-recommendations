@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
       }
     }
     viewModel.fetchRestaurants()
+    viewModel.handleWishlist()
   }
 }
 

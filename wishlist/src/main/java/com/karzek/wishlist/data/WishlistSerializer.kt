@@ -8,14 +8,14 @@ import java.io.OutputStream
 
 private const val NAME_DATA_STORE ="wishlist.pb"
 
-object WishlistSerializer : Serializer<WishlistDto> {
-  override val defaultValue: WishlistDto = WishlistDto.getDefaultInstance()
+object WishlistSerializer : Serializer<WishlistData> {
+  override val defaultValue: WishlistData = WishlistData.getDefaultInstance()
 
-  override suspend fun readFrom(input: InputStream): WishlistDto {
-    return WishlistDto.parseFrom(input)
+  override suspend fun readFrom(input: InputStream): WishlistData {
+    return WishlistData.parseFrom(input)
   }
 
-  override suspend fun writeTo(t: WishlistDto, output: OutputStream) {
+  override suspend fun writeTo(t: WishlistData, output: OutputStream) {
     t.writeTo(output)
   }
 }

@@ -7,9 +7,15 @@ import com.karzek.core.error.ErrorEntity
 import com.karzek.core.result.Result
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantRepository
+import com.karzek.domain.wishlist.WishlistRepository
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.UUID
 
-class MainViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
+class MainViewModel(
+  private val restaurantRepository: RestaurantRepository,
+  private val wishlistRepository: WishlistRepository,
+) : ViewModel() {
 
   fun fetchRestaurants() {
     viewModelScope.launch {
@@ -17,6 +23,17 @@ class MainViewModel(private val restaurantRepository: RestaurantRepository) : Vi
         is Result.Success -> showRestaurants(result.data)
         is Result.Error -> showError(result.error)
       }
+    }
+  }
+
+  fun handleWishlist() {
+    viewModelScope.launch {
+      wishlistRepository.observeRestaurantIds().collectLatest {
+        Log.d("WISHLIST DATA", "$it")
+      }
+      val newID = "new id + ${UUID.randomUUID()}"
+      Log.d("WISHLIST PUT", newID)
+      wishlistRepository.putRestaurantId(newID)
     }
   }
 

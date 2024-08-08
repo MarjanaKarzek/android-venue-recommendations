@@ -3,6 +3,6 @@ syntax = "proto3";
 option java_package = "com.karzek.wishlist.data";
 option java_multiple_files = true;
 
-message WishlistDto {
+message WishlistData {
   repeated string restaurant_ids = 1;
 }

@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.transform
 class WishlistRepositoryImpl(
   private val dispatcher: DispatcherProvider,
   private val errorEntityFactory: ErrorEntityFactory,
-  private val storage: DataStore<WishlistDto>,
+  private val storage: DataStore<WishlistData>,
 ) : WishlistRepository {
 
   override fun observeRestaurantIds(): Flow<List<String>> = storage.data
-    .transform { it.restaurantIdsList }
+    .transform { it.restaurantIdsList ?: emptyList() }
 
   override suspend fun putRestaurantId(id: String): ResultComplete {
     return safeApiCall(dispatcher.io, errorEntityFactory) {
