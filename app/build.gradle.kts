@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+  implementation(project(":core"))
   implementation(project(":venues"))
 
   implementation(libs.androidx.core.ktx)

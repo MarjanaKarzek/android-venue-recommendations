@@ -1,7 +1,8 @@
 package com.karzek.venues.di
 
-import org.koin.core.module.Module
+import com.karzek.core.di.networkingModule
 
-val appModules = listOf<Module>(
+val appModules = listOf(
+  networkingModule,
   venueModule,
 )
