@@ -6,7 +6,7 @@ import androidx.datastore.dataStore
 import java.io.InputStream
 import java.io.OutputStream
 
-private const val NAME_DATA_STORE ="wishlist.pb"
+private const val WISHLIST_DATA_STORE_FILE_NAME ="wishlist.pb"
 
 object WishlistSerializer : Serializer<WishlistData> {
   override val defaultValue: WishlistData = WishlistData.getDefaultInstance()
@@ -21,6 +21,6 @@ object WishlistSerializer : Serializer<WishlistData> {
 }
 
 val Context.wishlistDataStore by dataStore(
-  fileName = NAME_DATA_STORE,
+  fileName = WISHLIST_DATA_STORE_FILE_NAME,
   serializer = WishlistSerializer
 )

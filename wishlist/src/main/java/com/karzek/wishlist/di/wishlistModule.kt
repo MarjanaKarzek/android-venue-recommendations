@@ -11,9 +11,9 @@ import org.koin.dsl.module
 val wishlistDataModule = module {
   single<WishlistRepository> {
     WishlistRepositoryImpl(
+      storage = get(),
       dispatcher = get(),
       errorEntityFactory = get(),
-      storage = get(),
     )
   }
 

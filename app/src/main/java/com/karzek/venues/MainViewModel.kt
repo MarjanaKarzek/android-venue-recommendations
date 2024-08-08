@@ -5,14 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
 import com.karzek.core.result.Result
+import com.karzek.domain.location.LocationRepository
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantRepository
 import com.karzek.domain.wishlist.WishlistRepository
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.UUID
 
 class MainViewModel(
+  private val locationRepository: LocationRepository,
   private val restaurantRepository: RestaurantRepository,
   private val wishlistRepository: WishlistRepository,
 ) : ViewModel() {
@@ -28,12 +29,20 @@ class MainViewModel(
 
   fun handleWishlist() {
     viewModelScope.launch {
-      wishlistRepository.observeRestaurantIds().collectLatest {
+      wishlistRepository.observeRestaurantIds().collect {
         Log.d("WISHLIST DATA", "$it")
       }
       val newID = "new id + ${UUID.randomUUID()}"
-      Log.d("WISHLIST PUT", newID)
+      Log.d("WISHLIST DATA", newID)
       wishlistRepository.putRestaurantId(newID)
+    }
+  }
+
+  fun handleLocation() {
+    viewModelScope.launch {
+      locationRepository.observeUserLocation().collect {
+        Log.d("LOCATION DATA", "${it.latitude}, ${it.longitude}")
+      }
     }
   }
 

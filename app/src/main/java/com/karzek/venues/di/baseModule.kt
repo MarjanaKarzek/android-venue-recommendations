@@ -23,6 +23,7 @@ val baseModule = module {
   }
   viewModel {
     MainViewModel(
+      locationRepository = get(),
       restaurantRepository = get(),
       wishlistRepository = get(),
     )
