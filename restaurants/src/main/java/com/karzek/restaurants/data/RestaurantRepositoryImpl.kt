@@ -11,6 +11,8 @@ import com.karzek.restaurants.data.api.RestaurantPageDTO.VenuesSectionDTO
 import com.karzek.restaurants.data.api.RestaurantsApi
 import com.karzek.restaurants.domain.Restaurant
 import com.karzek.restaurants.domain.RestaurantRepository
+import com.karzek.restaurants.data.error.RestaurantsNotFound
+import com.karzek.restaurants.data.error.VenueSectionNotFound
 
 class RestaurantRepositoryImpl(
   private val api: RestaurantsApi,
@@ -31,9 +33,9 @@ class RestaurantRepositoryImpl(
         longitude = longitude
       ).sections.find { it.name == NAME_SECTION_VENUES } as? VenuesSectionDTO
 
-      checkNotNull(section) { throw IllegalStateException("venues section not found") }
+      checkNotNull(section) { throw VenueSectionNotFound() }
       val restaurants = section.items.map { mapper.convert(it) }
-      check(restaurants.isEmpty()) { throw IllegalStateException("no restaurants found") }
+      check(restaurants.isEmpty()) { throw RestaurantsNotFound() }
       restaurants
     }
   }
