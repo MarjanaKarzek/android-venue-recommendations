@@ -1,5 +1,4 @@
 import com.google.protobuf.gradle.id
-import com.google.protobuf.gradle.remove
 
 plugins {
   alias(libs.plugins.android.library)

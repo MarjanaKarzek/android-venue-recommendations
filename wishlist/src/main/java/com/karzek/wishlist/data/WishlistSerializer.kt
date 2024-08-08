@@ -5,22 +5,22 @@ import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
 import java.io.InputStream
 import java.io.OutputStream
-/*
-object WishlistSerializer : Serializer<Wishlist> {
-  override val defaultValue: Wishlist = Wishlist.getDefaultInstance()
 
-  override suspend fun readFrom(input: InputStream): Wishlist {
-    return Wishlist.parseFrom(input)
+private const val NAME_DATA_STORE ="wishlist.pb"
+
+object WishlistSerializer : Serializer<WishlistDto> {
+  override val defaultValue: WishlistDto = WishlistDto.getDefaultInstance()
+
+  override suspend fun readFrom(input: InputStream): WishlistDto {
+    return WishlistDto.parseFrom(input)
   }
 
-  override suspend fun writeTo(wishlist: Wishlist, output: OutputStream) {
-    wishlist.writeTo(output)
+  override suspend fun writeTo(t: WishlistDto, output: OutputStream) {
+    t.writeTo(output)
   }
 }
 
 val Context.wishlistDataStore by dataStore(
-  fileName = "wishlist.pb",
+  fileName = NAME_DATA_STORE,
   serializer = WishlistSerializer
 )
-
- */
