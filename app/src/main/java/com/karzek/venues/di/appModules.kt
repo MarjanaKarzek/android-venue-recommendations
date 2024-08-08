@@ -5,8 +5,8 @@ import com.karzek.core.di.networkingModule
 import com.karzek.restaurants.di.restaurantsModule
 
 val appModules = listOf(
+  baseModule,
   coreModule,
   networkingModule,
   restaurantsModule,
-  moshiModule,
 )
