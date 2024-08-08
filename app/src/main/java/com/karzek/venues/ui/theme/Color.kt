@@ -1,4 +1,4 @@
-package com.karzek.restaurants.ui.theme
+package com.karzek.venues.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

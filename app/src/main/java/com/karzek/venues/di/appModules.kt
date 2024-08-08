@@ -1,6 +1,7 @@
-package com.karzek.restaurants.di
+package com.karzek.venues.di
 
 import com.karzek.core.di.networkingModule
+import com.karzek.restaurants.di.restaurantsModule
 
 val appModules = listOf(
   networkingModule,

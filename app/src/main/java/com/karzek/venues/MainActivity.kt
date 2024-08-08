@@ -1,4 +1,4 @@
-package com.karzek.restaurants
+package com.karzek.venues
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.karzek.restaurants.ui.theme.VenueRecommendationsTheme
+import com.karzek.venues.ui.theme.VenueRecommendationsTheme
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {

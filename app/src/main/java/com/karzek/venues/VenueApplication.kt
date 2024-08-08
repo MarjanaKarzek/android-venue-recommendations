@@ -1,7 +1,7 @@
-package com.karzek.restaurants
+package com.karzek.venues
 
 import android.app.Application
-import com.karzek.restaurants.di.appModules
+import com.karzek.venues.di.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
