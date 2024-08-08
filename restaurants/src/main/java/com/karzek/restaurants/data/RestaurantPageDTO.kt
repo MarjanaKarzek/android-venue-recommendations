@@ -3,6 +3,9 @@ package com.karzek.restaurants.data
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+const val NAME_SECTION_CATEGORY = "restaurants_page_categories"
+const val NAME_SECTION_VENUES = "restaurants-delivering-venues"
+
 @JsonClass(generateAdapter = true)
 data class RestaurantPageDTO(
   @Json(name = "sections") val sections: List<SectionDTO>
@@ -13,24 +16,24 @@ data class RestaurantPageDTO(
   }
 
   @JsonClass(generateAdapter = true)
-  data class CategorySectionItemDTO(
+  data class CategoriesSectionDTO(
     @Json(name = "name") override val name: String,
-    @Json(name = "content_id") val contentId: String,
-    @Json(name = "description") val description: String,
-    @Json(name = "image") val image: ItemImageDTO,
+  ) : SectionDTO
+
+  @JsonClass(generateAdapter = true)
+  data class VenuesSectionDTO(
+    @Json(name = "name") override val name: String,
+    @Json(name = "items") val items: List<VenueSectionItemDTO>,
   ) : SectionDTO
 
   @JsonClass(generateAdapter = true)
   data class VenueSectionItemDTO(
-    @Json(name = "name") override val name: String,
-    @Json(name = "content_id") val contentId: String,
-    @Json(name = "description") val description: String,
-    @Json(name = "image") val image: ItemImageDTO,
+    @Json(name = "image") val image: ImageDTO,
     @Json(name = "venue") val venue: VenueDTO,
-  ) : SectionDTO
+  )
 
   @JsonClass(generateAdapter = true)
-  data class ItemImageDTO(
+  data class ImageDTO(
     @Json(name = "url") val url: String,
   )
 
