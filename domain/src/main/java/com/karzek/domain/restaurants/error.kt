@@ -1,4 +1,4 @@
-package com.karzek.restaurants.domain
+package com.karzek.domain.restaurants
 
 import com.karzek.core.error.FeatureError
 

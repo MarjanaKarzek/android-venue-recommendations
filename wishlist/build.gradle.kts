@@ -1,16 +1,21 @@
+import com.google.protobuf.gradle.id
+import com.google.protobuf.gradle.remove
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.protobuf.plugin)
 }
 
 android {
-  namespace = "com.karzek.restaurants"
+  namespace = "com.karzek.wishlist"
   compileSdk = 34
 
   defaultConfig {
     minSdk = 24
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -28,6 +33,21 @@ android {
   }
 }
 
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.24.1"
+  }
+  generateProtoTasks {
+    all().forEach { task ->
+      task.builtins {
+        id("java") {
+          option("lite")
+        }
+      }
+    }
+  }
+}
+
 dependencies {
   implementation(project(":core"))
   implementation(project(":domain"))
@@ -35,7 +55,9 @@ dependencies {
   implementation(platform(libs.koin.bom))
   implementation(libs.koin.android)
   implementation(libs.koin.core)
-  implementation(libs.retrofit)
+  implementation(libs.androidx.core.ktx)
   implementation(libs.moshi)
-  implementation(libs.moshi.adapters)
+  implementation(libs.datastore)
+  implementation(libs.datastore.core)
+  implementation(libs.protobuf.javalite)
 }

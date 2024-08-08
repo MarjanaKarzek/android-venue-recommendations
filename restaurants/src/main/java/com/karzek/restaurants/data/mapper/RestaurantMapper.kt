@@ -2,7 +2,7 @@ package com.karzek.restaurants.data.mapper
 
 import com.karzek.core.mapper.Mapper
 import com.karzek.restaurants.data.api.RestaurantPageDTO.VenueSectionItemDTO
-import com.karzek.restaurants.domain.Restaurant
+import com.karzek.domain.restaurants.Restaurant
 
 class RestaurantMapper : Mapper<VenueSectionItemDTO, Restaurant> {
   override fun convert(data: VenueSectionItemDTO): Restaurant {

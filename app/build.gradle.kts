@@ -51,6 +51,7 @@ android {
 
 dependencies {
   implementation(project(":core"))
+  implementation(project(":domain"))
   implementation(project(":restaurants"))
 
   implementation(libs.androidx.core.ktx)
@@ -67,6 +68,7 @@ dependencies {
   implementation(libs.moshi)
   implementation(libs.moshi.adapters)
   implementation(libs.moshi.kotlin)
+  implementation(project(":wishlist"))
 
   testImplementation(libs.junit)
 

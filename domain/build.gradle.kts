@@ -4,13 +4,14 @@ plugins {
 }
 
 android {
-  namespace = "com.karzek.restaurants"
+  namespace = "com.karzek.domain"
   compileSdk = 34
 
   defaultConfig {
     minSdk = 24
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -30,12 +31,6 @@ android {
 
 dependencies {
   implementation(project(":core"))
-  implementation(project(":domain"))
 
-  implementation(platform(libs.koin.bom))
-  implementation(libs.koin.android)
-  implementation(libs.koin.core)
-  implementation(libs.retrofit)
-  implementation(libs.moshi)
-  implementation(libs.moshi.adapters)
+  implementation(libs.androidx.core.ktx)
 }

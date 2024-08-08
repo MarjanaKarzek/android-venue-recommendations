@@ -8,12 +8,11 @@ import com.karzek.restaurants.data.RestaurantRepositoryImpl
 import com.karzek.restaurants.data.api.RestaurantsApi
 import com.karzek.restaurants.data.error.RestaurantsErrorEntityFactory
 import com.karzek.restaurants.data.mapper.RestaurantMapper
-import com.karzek.restaurants.domain.RestaurantRepository
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val restaurantsModule = module {
-  single<RestaurantRepository> {
+val restaurantModule = module {
+  single<com.karzek.domain.restaurants.RestaurantRepository> {
     RestaurantRepositoryImpl(
       api = get(),
       mapper = getMapper(),

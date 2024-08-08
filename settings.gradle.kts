@@ -23,3 +23,5 @@ rootProject.name = "Venue Recommendations"
 include(":app")
 include(":restaurants")
 include(":core")
+include(":wishlist")
+include(":domain")

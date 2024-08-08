@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
 import com.karzek.core.result.Result
-import com.karzek.restaurants.domain.Restaurant
-import com.karzek.restaurants.domain.RestaurantRepository
+import com.karzek.domain.restaurants.Restaurant
+import com.karzek.domain.restaurants.RestaurantRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val restaurantRepository: RestaurantRepository) : ViewModel() {
