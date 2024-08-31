@@ -1,9 +1,12 @@
 package com.karzek.designsystem.venue
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -11,12 +14,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.karzek.designsystem.X0_5
 import com.karzek.designsystem.X1
+import com.karzek.designsystem.X3
 import com.karzek.designsystem.button.WishIconButton
+import com.karzek.designsystem.colors.labelPrimary
 import com.karzek.designsystem.typography.body
 import com.karzek.designsystem.typography.title
 
@@ -57,17 +65,28 @@ private fun BoxScope.VenueDescription(data: VenueCardData) {
   Column(
     modifier = Modifier
       .fillMaxWidth()
-      .padding(X1)
+      .background(
+        brush = Brush.verticalGradient(colors = listOf(Color.Transparent, Color.White))
+      )
       .align(Alignment.BottomCenter)
   ) {
-    Text(text = data.name, style = MaterialTheme.typography.title)
+    Text(
+      modifier = Modifier.padding(start = X1, end = X1, top = X3),
+      text = data.name,
+      style = MaterialTheme.typography.title,
+      color = MaterialTheme.colorScheme.labelPrimary,
+    )
     data.shortDescription?.let {
       Text(
-        modifier = Modifier.padding(top = X0_5),
+        modifier = Modifier.padding(start = X1, end = X1, top = X0_5),
         text = it,
-        style = MaterialTheme.typography.body
+        style = MaterialTheme.typography.body,
+        color = MaterialTheme.colorScheme.labelPrimary,
+        maxLines = 3,
+        overflow = TextOverflow.Ellipsis,
       )
     }
+    Spacer(modifier = Modifier.height(X1))
   }
 }
 

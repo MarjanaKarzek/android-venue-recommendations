@@ -13,7 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.karzek.designsystem.X1
-import com.karzek.designsystem.theme.VenueRecommendationsTheme
+import com.karzek.designsystem.theme.AppTheme
 import com.karzek.designsystem.venue.VenueCard
 import org.koin.android.ext.android.inject
 
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
-      VenueRecommendationsTheme {
+      AppTheme {
         val state = viewModel.viewState.collectAsStateWithLifecycle()
 
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
