@@ -32,9 +32,11 @@ class MainViewModel(
       wishlistRepository.observeRestaurantIds().collect {
         Log.d("WISHLIST DATA", "$it")
       }
-      val newID = "new id + ${UUID.randomUUID()}"
-      Log.d("WISHLIST DATA", newID)
-      wishlistRepository.putRestaurantId(newID)
+    }
+    viewModelScope.launch {
+      val newID = UUID.randomUUID()
+      Log.d("WISHLIST DATA", "new id: $newID")
+      wishlistRepository.putRestaurantId(newID.toString())
     }
   }
 
