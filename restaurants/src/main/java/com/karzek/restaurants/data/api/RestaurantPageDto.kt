@@ -7,38 +7,38 @@ const val NAME_SECTION_CATEGORY = "restaurants_page_categories"
 const val NAME_SECTION_VENUES = "restaurants-delivering-venues"
 
 @JsonClass(generateAdapter = true)
-data class RestaurantPageDTO(
-  @Json(name = "sections") val sections: List<SectionDTO>
+data class RestaurantPageDto(
+  @Json(name = "sections") val sections: List<SectionDto>
 ) {
 
-  interface SectionDTO {
+  interface SectionDto {
     val name: String
   }
 
   @JsonClass(generateAdapter = true)
-  data class CategoriesSectionDTO(
+  data class CategoriesSectionDto(
     @Json(name = "name") override val name: String,
-  ) : SectionDTO
+  ) : SectionDto
 
   @JsonClass(generateAdapter = true)
-  data class VenuesSectionDTO(
+  data class VenuesSectionDto(
     @Json(name = "name") override val name: String,
-    @Json(name = "items") val items: List<VenueSectionItemDTO>,
-  ) : SectionDTO
+    @Json(name = "items") val items: List<VenueSectionItemDto>,
+  ) : SectionDto
 
   @JsonClass(generateAdapter = true)
-  data class VenueSectionItemDTO(
-    @Json(name = "image") val image: ImageDTO,
-    @Json(name = "venue") val venue: VenueDTO,
+  data class VenueSectionItemDto(
+    @Json(name = "image") val image: ImageDto,
+    @Json(name = "venue") val venue: VenueDto,
   )
 
   @JsonClass(generateAdapter = true)
-  data class ImageDTO(
+  data class ImageDto(
     @Json(name = "url") val url: String,
   )
 
   @JsonClass(generateAdapter = true)
-  data class VenueDTO(
+  data class VenueDto(
     @Json(name = "id") val id: String,
     @Json(name = "name") val name: String,
     @Json(name = "short_description") val shortDescription: String?,

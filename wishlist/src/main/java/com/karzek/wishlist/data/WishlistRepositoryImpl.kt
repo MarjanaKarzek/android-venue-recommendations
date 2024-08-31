@@ -1,7 +1,6 @@
 package com.karzek.wishlist.data
 
 import android.content.SharedPreferences
-import android.util.Log
 import com.karzek.core.coroutines.DispatcherProvider
 import com.karzek.core.error.ErrorEntityFactory
 import com.karzek.core.result.ResultComplete
@@ -33,7 +32,7 @@ class WishlistRepositoryImpl(
       val currentWishlist = getWishlist()
       var currentRestaurantIds = currentWishlist.restaurantIds.toMutableList()
       currentRestaurantIds = currentRestaurantIds.apply { add(id) }
-      putWishlist(Wishlist(currentRestaurantIds))
+      putWishlist(WishlistDto(currentRestaurantIds))
       _wishlistIds.value = currentWishlist.restaurantIds
     }
   }
@@ -47,23 +46,23 @@ class WishlistRepositoryImpl(
     }
   }
 
-  private fun getWishlist(): Wishlist {
+  private fun getWishlist(): WishlistDto {
     val json = storage.getString(KEY_WISH_LISTED_RESTAURANT_IDS, null)
     return if (json == null) {
-      Wishlist(emptyList())
+      WishlistDto(emptyList())
     } else {
       try {
-        moshi.adapter(Wishlist::class.java).fromJson(json) ?: Wishlist(emptyList())
+        moshi.adapter(WishlistDto::class.java).fromJson(json) ?: WishlistDto(emptyList())
       } catch (e: Exception) {
         // state can't be recovered but should be logged for observation
-        Wishlist(emptyList())
+        WishlistDto(emptyList())
       }
     }
   }
 
-  private suspend fun putWishlist(wishlist: Wishlist) {
+  private suspend fun putWishlist(wishlist: WishlistDto) {
     withContext(dispatcher.io) {
-      val json = moshi.adapter(Wishlist::class.java).toJson(wishlist)
+      val json = moshi.adapter(WishlistDto::class.java).toJson(wishlist)
       storage.edit().putString(KEY_WISH_LISTED_RESTAURANT_IDS, json).commit()
     }
   }

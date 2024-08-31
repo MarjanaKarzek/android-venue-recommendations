@@ -9,5 +9,5 @@ interface RestaurantsApi {
   suspend fun getRestaurants(
     @Query("lat") latitude: String,
     @Query("lon") longitude: String,
-  ): RestaurantPageDTO
+  ): RestaurantPageDto
 }

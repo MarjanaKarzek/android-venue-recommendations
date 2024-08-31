@@ -8,8 +8,8 @@ import com.karzek.domain.restaurants.VenueSectionNotFoundError
 class RestaurantsErrorEntityFactory : ModuleErrorEntityFactory {
   override fun toError(throwable: Throwable): ErrorEntity? {
     return when (throwable) {
-      is VenueSectionNotFound -> com.karzek.domain.restaurants.VenueSectionNotFoundError(throwable)
-      is RestaurantsNotFound -> com.karzek.domain.restaurants.NoRestaurantsFoundError(throwable)
+      is VenueSectionNotFound -> VenueSectionNotFoundError(throwable)
+      is RestaurantsNotFound -> NoRestaurantsFoundError(throwable)
       else -> null
     }
   }

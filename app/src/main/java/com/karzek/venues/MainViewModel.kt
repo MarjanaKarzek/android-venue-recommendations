@@ -18,12 +18,14 @@ class MainViewModel(
   private val wishlistRepository: WishlistRepository,
 ) : ViewModel() {
 
-  fun fetchRestaurants() {
-    viewModelScope.launch {
-      when (val result = restaurantRepository.getRestaurants("60.170187", "24.930599", 15)) {
-        is Result.Success -> showRestaurants(result.data)
-        is Result.Error -> showError(result.error)
-      }
+  companion object {
+    private const val LIMIT_VENUES: Int = 15
+  }
+
+  private suspend fun fetchRestaurants(latitude: String, longitude: String) {
+    when (val result = restaurantRepository.getRestaurants(latitude, longitude, LIMIT_VENUES)) {
+      is Result.Success -> showRestaurants(result.data)
+      is Result.Error -> showError(result.error)
     }
   }
 
@@ -44,6 +46,7 @@ class MainViewModel(
     viewModelScope.launch {
       locationRepository.observeUserLocation().collect {
         Log.d("LOCATION DATA", "${it.latitude}, ${it.longitude}")
+        fetchRestaurants(it.latitude, it.longitude)
       }
     }
   }
