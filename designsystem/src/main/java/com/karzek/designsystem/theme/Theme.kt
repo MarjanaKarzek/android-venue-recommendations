@@ -1,4 +1,4 @@
-package com.karzek.venues.ui.theme
+package com.karzek.designsystem.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

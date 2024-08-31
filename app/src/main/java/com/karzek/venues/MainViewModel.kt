@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
 import com.karzek.core.result.Result
+import com.karzek.designsystem.venue.VenueCardData
 import com.karzek.domain.location.LocationRepository
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantRepository
 import com.karzek.domain.wishlist.WishlistRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -21,6 +24,10 @@ class MainViewModel(
   companion object {
     private const val LIMIT_VENUES: Int = 15
   }
+
+  private val _viewState: MutableStateFlow<List<VenueCardData>> = MutableStateFlow(emptyList())
+  val viewState: StateFlow<List<VenueCardData>> = _viewState
+
 
   private suspend fun fetchRestaurants(latitude: String, longitude: String) {
     when (val result = restaurantRepository.getRestaurants(latitude, longitude, LIMIT_VENUES)) {
@@ -53,6 +60,14 @@ class MainViewModel(
 
   private fun showRestaurants(data: List<Restaurant>) {
     Log.d("DATA SUCCESS", "${data.map { "${it.name} \n" }}")
+    _viewState.value = data.map {
+      VenueCardData(
+        name = it.name,
+        shortDescription = it.shortDescription,
+        imageUrl = it.imageUrl,
+        isWishListed = true,
+      )
+    }
   }
 
   private fun showError(error: ErrorEntity) {
