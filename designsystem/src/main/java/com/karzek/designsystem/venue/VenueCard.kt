@@ -25,6 +25,7 @@ data class VenueCardData(
   val shortDescription: String?,
   val imageUrl: String,
   val isWishListed: Boolean,
+  val onWishClick: () -> Unit,
 )
 
 @Composable
@@ -40,7 +41,7 @@ fun VenueCard(
         horizontalArrangement = Arrangement.SpaceBetween
       ) {
         Text(text = data.name, style = MaterialTheme.typography.title)
-        WishIconButton(data.isWishListed, "") {}
+        WishIconButton(data.isWishListed, "", onClick = data.onWishClick)
       }
       data.shortDescription?.let {
         Text(text = it, style = MaterialTheme.typography.body)
@@ -66,6 +67,7 @@ fun VenueCardPreview() {
       shortDescription = null,
       imageUrl = "",
       isWishListed = true,
+      onWishClick = {},
     )
   )
 }

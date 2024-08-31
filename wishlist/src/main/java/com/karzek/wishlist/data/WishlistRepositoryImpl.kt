@@ -9,7 +9,7 @@ import com.karzek.domain.wishlist.WishlistRepository
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class WishlistRepositoryImpl(
   private val storage: SharedPreferences,
@@ -29,20 +29,17 @@ class WishlistRepositoryImpl(
 
   override suspend fun putRestaurantId(id: String): ResultComplete {
     return safeApiCall(dispatcher.io, errorEntityFactory) {
-      val currentWishlist = getWishlist()
-      var currentRestaurantIds = currentWishlist.restaurantIds.toMutableList()
-      currentRestaurantIds = currentRestaurantIds.apply { add(id) }
+      val currentRestaurantIds = getWishlist().restaurantIds.toMutableList().apply { add(id) }
       putWishlist(WishlistDto(currentRestaurantIds))
-      _wishlistIds.value = currentWishlist.restaurantIds
+      _wishlistIds.value = currentRestaurantIds
     }
   }
 
   override suspend fun removeRestaurantId(id: String): ResultComplete {
     return safeApiCall(dispatcher.io, errorEntityFactory) {
-      val currentWishlist = getWishlist()
-      currentWishlist.restaurantIds.toMutableList().remove(id)
-      putWishlist(currentWishlist)
-      _wishlistIds.value = currentWishlist.restaurantIds
+      val currentRestaurantIds = getWishlist().restaurantIds.toMutableList().apply { remove(id) }
+      putWishlist(WishlistDto(currentRestaurantIds))
+      _wishlistIds.value = currentRestaurantIds
     }
   }
 
@@ -54,16 +51,16 @@ class WishlistRepositoryImpl(
       try {
         moshi.adapter(WishlistDto::class.java).fromJson(json) ?: WishlistDto(emptyList())
       } catch (e: Exception) {
-        // state can't be recovered but should be logged for observation
+        // state can't be recovered
+        Timber.e(e)
+        storage.edit().remove(KEY_WISH_LISTED_RESTAURANT_IDS).apply()
         WishlistDto(emptyList())
       }
     }
   }
 
-  private suspend fun putWishlist(wishlist: WishlistDto) {
-    withContext(dispatcher.io) {
-      val json = moshi.adapter(WishlistDto::class.java).toJson(wishlist)
-      storage.edit().putString(KEY_WISH_LISTED_RESTAURANT_IDS, json).commit()
-    }
+  private fun putWishlist(wishlist: WishlistDto) {
+    val json = moshi.adapter(WishlistDto::class.java).toJson(wishlist)
+    storage.edit().putString(KEY_WISH_LISTED_RESTAURANT_IDS, json).commit()
   }
 }

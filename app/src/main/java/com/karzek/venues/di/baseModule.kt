@@ -21,5 +21,5 @@ val baseModule = module {
       listOf(NetworkErrorEntityFactory)
     )
   }
-  viewModel { MainViewModel(useCase = get()) }
+  viewModel { MainViewModel(useCase = get(), wishlistRepository = get()) }
 }

@@ -38,4 +38,5 @@ dependencies {
   implementation(libs.koin.core)
   implementation(libs.androidx.core.ktx)
   implementation(libs.moshi)
+  implementation(libs.timber)
 }
