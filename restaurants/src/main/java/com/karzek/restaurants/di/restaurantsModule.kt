@@ -4,6 +4,7 @@ import com.karzek.core.di.getMapper
 import com.karzek.core.di.mapper
 import com.karzek.core.error.ComposedErrorEntityFactory
 import com.karzek.core.network.NetworkErrorEntityFactory
+import com.karzek.domain.restaurants.GetRestaurantsUseCase
 import com.karzek.domain.restaurants.RestaurantRepository
 import com.karzek.restaurants.data.RestaurantRepositoryImpl
 import com.karzek.restaurants.data.api.RestaurantsApi
@@ -23,6 +24,14 @@ val restaurantModule = module {
   }
 
   mapper { RestaurantMapper() }
+
+  factory {
+    GetRestaurantsUseCase(
+      locationRepository = get(),
+      wishlistRepository = get(),
+      restaurantRepository = get()
+    )
+  }
 
   single<RestaurantsApi> { get<Retrofit>().create(RestaurantsApi::class.java) }
 }
