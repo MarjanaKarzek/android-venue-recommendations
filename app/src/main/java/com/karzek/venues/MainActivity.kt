@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.karzek.designsystem.X1
 import com.karzek.designsystem.theme.VenueRecommendationsTheme
 import com.karzek.designsystem.venue.VenueCard
 import org.koin.android.ext.android.inject
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
           Column(modifier = Modifier.padding(paddingValues)) {
             state.value.forEach {
-              VenueCard(data = it)
+              VenueCard(modifier = Modifier.padding(X1), data = it)
             }
           }
         }

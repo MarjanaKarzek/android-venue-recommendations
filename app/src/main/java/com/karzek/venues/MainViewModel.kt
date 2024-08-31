@@ -1,6 +1,5 @@
 package com.karzek.venues
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
@@ -13,6 +12,7 @@ import com.karzek.domain.wishlist.WishlistRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.UUID
 
 class MainViewModel(
@@ -39,12 +39,12 @@ class MainViewModel(
   fun handleWishlist() {
     viewModelScope.launch {
       wishlistRepository.observeRestaurantIds().collect {
-        Log.d("WISHLIST DATA", "$it")
+        Timber.d("WISHLIST DATA", "$it")
       }
     }
     viewModelScope.launch {
       val newID = UUID.randomUUID()
-      Log.d("WISHLIST DATA", "new id: $newID")
+      Timber.d("WISHLIST DATA", "new id: $newID")
       wishlistRepository.putRestaurantId(newID.toString())
     }
   }
@@ -52,14 +52,14 @@ class MainViewModel(
   fun handleLocation() {
     viewModelScope.launch {
       locationRepository.observeUserLocation().collect {
-        Log.d("LOCATION DATA", "${it.latitude}, ${it.longitude}")
+        Timber.d("LOCATION DATA", "${it.latitude}, ${it.longitude}")
         fetchRestaurants(it.latitude, it.longitude)
       }
     }
   }
 
   private fun showRestaurants(data: List<Restaurant>) {
-    Log.d("DATA SUCCESS", "${data.map { "${it.name} \n" }}")
+    Timber.d("DATA SUCCESS", "${data.map { "${it.name} \n" }}")
     _viewState.value = data.map {
       VenueCardData(
         name = it.name,
@@ -71,7 +71,7 @@ class MainViewModel(
   }
 
   private fun showError(error: ErrorEntity) {
-    Log.e("DATA ERROR", "${error.throwable.message}")
+    Timber.e("DATA ERROR", "${error.throwable.message}")
   }
 
 }

@@ -19,6 +19,7 @@ moshi = "1.15.1"
 datastore = "1.1.1"
 protobuf = "0.9.4"
 protobufArtefact = "3.24.1"
+timber = "5.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,10 +53,11 @@ moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "mosh
 moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
 chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
-datastore= { module = "androidx.datastore:datastore", version.ref = "datastore" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "datastore" }
-protobuf-javalite= { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufArtefact" }
-protobuf-kotlinlite= { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobufArtefact" }
+protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufArtefact" }
+protobuf-kotlinlite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobufArtefact" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

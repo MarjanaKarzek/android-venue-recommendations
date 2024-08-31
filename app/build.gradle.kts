@@ -37,6 +37,7 @@ android {
     jvmTarget = "1.8"
   }
   buildFeatures {
+    buildConfig = true
     compose = true
   }
   composeOptions {
@@ -72,6 +73,9 @@ dependencies {
   implementation(libs.moshi)
   implementation(libs.moshi.adapters)
   implementation(libs.moshi.kotlin)
+  implementation(libs.timber)
+  debugImplementation(libs.chucker)
+  releaseImplementation(libs.chucker.no.op)
 
   testImplementation(libs.junit)
 
