@@ -1,7 +1,6 @@
 package com.karzek.designsystem.card
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -16,14 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.karzek.designsystem.R
 import com.karzek.designsystem.button.IconButton
+import com.karzek.designsystem.decoration.surfaceGradient
 import com.karzek.designsystem.token.RadiusToken
 import com.karzek.designsystem.token.SpacingToken.X0_5
 import com.karzek.designsystem.token.SpacingToken.X1
@@ -71,16 +69,7 @@ private fun BoxScope.CardBody(data: CardData) {
   Column(
     modifier = Modifier
       .fillMaxWidth()
-      .background(
-        brush = Brush.verticalGradient(
-          colorStops = arrayOf(
-            0.0f to Color.Transparent,
-            0.2f to MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
-            0.55f to MaterialTheme.colorScheme.surface,
-            1f to MaterialTheme.colorScheme.surface,
-          )
-        )
-      )
+      .surfaceGradient()
       .align(Alignment.BottomCenter)
   ) {
     Text(
