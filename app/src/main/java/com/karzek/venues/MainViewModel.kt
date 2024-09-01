@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
 import com.karzek.core.result.Result
-import com.karzek.designsystem.venue.VenueCardData
+import com.karzek.designsystem.R
+import com.karzek.designsystem.card.CardData
 import com.karzek.domain.restaurants.GetRestaurantsUseCase
+import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +21,8 @@ class MainViewModel(
   private val wishlistRepository: WishlistRepository,
 ) : ViewModel() {
 
-  private val _viewState: MutableStateFlow<List<VenueCardData>> = MutableStateFlow(emptyList())
-  val viewState: StateFlow<List<VenueCardData>> = _viewState
+  private val _viewState: MutableStateFlow<List<CardData>> = MutableStateFlow(emptyList())
+  val viewState: StateFlow<List<CardData>> = _viewState
 
   init {
     viewModelScope.launch {
@@ -41,14 +43,14 @@ class MainViewModel(
   private fun showRestaurants(data: RestaurantOutput) {
     Timber.d("DATA SUCCESS", "${data.restaurants.map { "${it.name} \n" }}")
     _viewState.value = data.restaurants.map {
-      VenueCardData(
-        name = it.name,
-        shortDescription = it.shortDescription,
+      CardData(
+        title = it.name,
+        description = it.shortDescription,
         imageUrl = it.imageUrl,
-        isWishListed = data.restaurantIds.contains(it.id),
-        onWishClick = {
+        icon = getWishIcon(data.restaurantIds, it),
+        onIconClicked = {
           viewModelScope.launch {
-            if(data.restaurantIds.contains(it.id)) {
+            if (data.restaurantIds.contains(it.id)) {
               wishlistRepository.removeRestaurantId(it.id)
             } else {
               wishlistRepository.putRestaurantId(it.id)
@@ -57,6 +59,15 @@ class MainViewModel(
         }
       )
     }
+  }
+
+  private fun getWishIcon(
+    restaurantIds: List<String>,
+    restaurant: Restaurant
+  ) = if (restaurantIds.contains(restaurant.id)) {
+    R.drawable.ic_heart_filled
+  } else {
+    R.drawable.ic_heart_outlined
   }
 
   private fun showError(error: ErrorEntity) {

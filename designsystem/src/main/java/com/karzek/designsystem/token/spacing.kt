@@ -1,4 +1,4 @@
-package com.karzek.designsystem
+package com.karzek.designsystem.token
 
 import androidx.compose.ui.unit.dp
 

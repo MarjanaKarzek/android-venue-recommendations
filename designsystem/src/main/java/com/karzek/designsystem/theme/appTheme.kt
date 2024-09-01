@@ -1,20 +1,33 @@
 package com.karzek.designsystem.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
-import com.karzek.designsystem.colors.DarkColorScheme
-import com.karzek.designsystem.colors.LightColorScheme
-import com.karzek.designsystem.typography.Typography
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun AppTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
+  dynamicColor: Boolean = true,
   content: @Composable () -> Unit
 ) {
+  val colorScheme = when {
+    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+      val context = LocalContext.current
+      if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    }
+
+    darkTheme -> darkScheme
+    else -> lightScheme
+  }
+
   MaterialTheme(
-    colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
-    typography = Typography,
+    colorScheme = colorScheme,
+    typography = AppTypography,
     content = content
   )
 }
+

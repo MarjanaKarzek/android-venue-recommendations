@@ -12,9 +12,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.karzek.designsystem.X1
+import com.karzek.designsystem.token.X1
 import com.karzek.designsystem.theme.AppTheme
-import com.karzek.designsystem.venue.VenueCard
+import com.karzek.designsystem.card.Card
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
             .padding(paddingValues)
             .verticalScroll(rememberScrollState())) {
             state.value.forEach {
-              VenueCard(modifier = Modifier.padding(X1), data = it)
+              Card(modifier = Modifier.padding(X1), data = it)
             }
           }
         }

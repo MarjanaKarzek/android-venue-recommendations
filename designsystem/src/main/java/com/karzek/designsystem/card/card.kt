@@ -1,5 +1,6 @@
-package com.karzek.designsystem.venue
+package com.karzek.designsystem.card
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -20,25 +21,25 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
-import com.karzek.designsystem.X0_5
-import com.karzek.designsystem.X1
-import com.karzek.designsystem.X3
-import com.karzek.designsystem.button.WishIconButton
-import com.karzek.designsystem.colors.labelPrimary
-import com.karzek.designsystem.typography.body
-import com.karzek.designsystem.typography.title
+import com.karzek.designsystem.R
+import com.karzek.designsystem.button.IconButton
+import com.karzek.designsystem.token.X0_5
+import com.karzek.designsystem.token.X1
+import com.karzek.designsystem.token.X3
 
-data class VenueCardData(
-  val name: String,
-  val shortDescription: String?,
+private const val DESCRIPTION_MAX_LINES: Int = 3
+
+data class CardData(
+  val title: String,
+  val description: String?,
   val imageUrl: String,
-  val isWishListed: Boolean,
-  val onWishClick: () -> Unit,
+  @DrawableRes val icon: Int,
+  val onIconClicked: () -> Unit,
 )
 
 @Composable
-fun VenueCard(
-  data: VenueCardData,
+fun Card(
+  data: CardData,
   modifier: Modifier = Modifier,
 ) {
   Card(modifier = modifier.fillMaxWidth()) {
@@ -49,19 +50,19 @@ fun VenueCard(
         modifier = Modifier.fillMaxWidth(),
         contentScale = ContentScale.Crop,
       )
-      WishIconButton(
+      IconButton(
         modifier = modifier.align(Alignment.TopEnd),
-        isWishListed = data.isWishListed,
+        icon = data.icon,
         contentDescription = "",
-        onClick = data.onWishClick
+        onClick = data.onIconClicked
       )
-      VenueDescription(data)
+      CardBody(data)
     }
   }
 }
 
 @Composable
-private fun BoxScope.VenueDescription(data: VenueCardData) {
+private fun BoxScope.CardBody(data: CardData) {
   Column(
     modifier = Modifier
       .fillMaxWidth()
@@ -72,17 +73,17 @@ private fun BoxScope.VenueDescription(data: VenueCardData) {
   ) {
     Text(
       modifier = Modifier.padding(start = X1, end = X1, top = X3),
-      text = data.name,
-      style = MaterialTheme.typography.title,
-      color = MaterialTheme.colorScheme.labelPrimary,
+      text = data.title,
+      style = MaterialTheme.typography.titleMedium,
+      color = MaterialTheme.colorScheme.onSurface,
     )
-    data.shortDescription?.let {
+    data.description?.let {
       Text(
         modifier = Modifier.padding(start = X1, end = X1, top = X0_5),
         text = it,
-        style = MaterialTheme.typography.body,
-        color = MaterialTheme.colorScheme.labelPrimary,
-        maxLines = 3,
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurface,
+        maxLines = DESCRIPTION_MAX_LINES,
         overflow = TextOverflow.Ellipsis,
       )
     }
@@ -92,14 +93,14 @@ private fun BoxScope.VenueDescription(data: VenueCardData) {
 
 @Preview
 @Composable
-fun VenueCardPreview() {
-  VenueCard(
-    VenueCardData(
-      name = "Taco Bell Tennispalatsi",
-      shortDescription = null,
+fun CardPreview() {
+  Card(
+    CardData(
+      title = "Taco Bell Tennispalatsi",
+      description = null,
       imageUrl = "",
-      isWishListed = true,
-      onWishClick = {},
+      icon = R.drawable.ic_heart_filled,
+      onIconClicked = {},
     )
   )
 }
