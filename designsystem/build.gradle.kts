@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.jetbrains.kotlin.android)
+  id("app.cash.paparazzi") version "1.3.4"
 }
 
 android {
@@ -33,6 +34,20 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = "1.5.1"
   }
+  testOptions {
+    unitTests.all {
+      if (!project.hasProperty("screenshot")) {
+        it.exclude("**/screenshots/**")
+      }
+    }
+    /**project.tasks.withType<Test>().configureEach {
+      useJUnitPlatform{
+        if(JavaVersion.current() >= JavaVersion.VERSION_13) {
+          jvmArgs = listOf("-XX:AllowRedefinitionToAddDeleteMethods")
+        }
+      }
+    }*/
+  }
 }
 
 dependencies {
@@ -48,6 +63,7 @@ dependencies {
   implementation(libs.material)
   implementation(libs.androidx.ui.text.google.fonts)
   testImplementation(libs.junit)
+  testImplementation(libs.paparazzi)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
 }
