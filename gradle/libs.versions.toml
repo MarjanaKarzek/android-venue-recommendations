@@ -17,12 +17,9 @@ retrofit = "2.11.0"
 okhttp-bom = "4.12.0"
 chucker = "4.0.0"
 moshi = "1.15.1"
-datastore = "1.1.1"
-protobuf = "0.9.4"
-protobufArtefact = "3.24.1"
 timber = "5.0.1"
 uiTextGoogleFonts = "1.6.8"
-paparazzi = "1.3.0"
+paparazzi = "1.3.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,10 +56,6 @@ chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "ch
 chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 paparazzi = { module = "app.cash.paparazzi:paparazzi", version.ref = "paparazzi" }
-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
-datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "datastore" }
-protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobufArtefact" }
-protobuf-kotlinlite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobufArtefact" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
