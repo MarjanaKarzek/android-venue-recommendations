@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,9 +24,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.karzek.designsystem.R
 import com.karzek.designsystem.button.IconButton
-import com.karzek.designsystem.token.X0_5
-import com.karzek.designsystem.token.X1
-import com.karzek.designsystem.token.X3
+import com.karzek.designsystem.token.RadiusToken
+import com.karzek.designsystem.token.SpacingToken.X0_5
+import com.karzek.designsystem.token.SpacingToken.X1
+import com.karzek.designsystem.token.SpacingToken.X3
 
 private const val DESCRIPTION_MAX_LINES: Int = 3
 
@@ -42,7 +44,10 @@ fun Card(
   data: CardData,
   modifier: Modifier = Modifier,
 ) {
-  Card(modifier = modifier.fillMaxWidth()) {
+  Card(
+    modifier = modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(RadiusToken.X1)
+  ) {
     Box {
       AsyncImage(
         model = data.imageUrl,
@@ -67,7 +72,14 @@ private fun BoxScope.CardBody(data: CardData) {
     modifier = Modifier
       .fillMaxWidth()
       .background(
-        brush = Brush.verticalGradient(colors = listOf(Color.Transparent, Color.White))
+        brush = Brush.verticalGradient(
+          colorStops = arrayOf(
+            0.0f to Color.Transparent,
+            0.2f to MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+            0.55f to MaterialTheme.colorScheme.surface,
+            1f to MaterialTheme.colorScheme.surface,
+          )
+        )
       )
       .align(Alignment.BottomCenter)
   ) {

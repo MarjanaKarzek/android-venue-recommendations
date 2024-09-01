@@ -12,9 +12,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.karzek.designsystem.token.X1
-import com.karzek.designsystem.theme.AppTheme
 import com.karzek.designsystem.card.Card
+import com.karzek.designsystem.theme.AppTheme
+import com.karzek.designsystem.token.SpacingToken.X1
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -29,9 +29,11 @@ class MainActivity : ComponentActivity() {
         val state = viewModel.viewState.collectAsStateWithLifecycle()
 
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
-          Column(modifier = Modifier
-            .padding(paddingValues)
-            .verticalScroll(rememberScrollState())) {
+          Column(
+            modifier = Modifier
+              .padding(paddingValues)
+              .verticalScroll(rememberScrollState())
+          ) {
             state.value.forEach {
               Card(modifier = Modifier.padding(X1), data = it)
             }
