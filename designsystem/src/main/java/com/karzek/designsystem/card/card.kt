@@ -54,7 +54,9 @@ fun Card(
         contentScale = ContentScale.Crop,
       )
       IconButton(
-        modifier = modifier.align(Alignment.TopEnd),
+        modifier = Modifier
+          .align(Alignment.TopEnd)
+          .padding(X1),
         icon = data.icon,
         contentDescription = "",
         onClick = data.onIconClicked

@@ -29,3 +29,7 @@ Also, since the wishlist is basically a list of Strings I avoided using a comple
 I would have used Room or DataStore for more complex data.
 
 Please let me know in case you would like to see me demonstrating usages of the above mentioned shortcuts.
+
+For tests you can find an example of a Screenshot, Integration and Unit test. 
+If the examples are not sufficient I can provide more.
+
