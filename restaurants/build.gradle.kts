@@ -26,6 +26,11 @@ android {
   kotlinOptions {
     jvmTarget = "17"
   }
+  testOptions {
+    project.tasks.withType<Test>().configureEach {
+      useJUnitPlatform()
+    }
+  }
 }
 
 dependencies {
@@ -38,4 +43,10 @@ dependencies {
   implementation(libs.retrofit)
   implementation(libs.moshi)
   implementation(libs.moshi.adapters)
+
+  testImplementation(libs.junit5)
+  testImplementation(libs.junit5.params)
+  testImplementation(libs.coroutines.test)
+  testImplementation(libs.mockito.kotlin)
+  runtimeOnly(libs.junit5.engine)
 }
