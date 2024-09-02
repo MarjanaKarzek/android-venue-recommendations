@@ -4,7 +4,7 @@ import com.karzek.core.error.ComposedErrorEntityFactory
 import com.karzek.core.error.ErrorEntityFactory
 import com.karzek.core.network.NetworkErrorEntityFactory
 import com.karzek.restaurants.data.api.sectionJsonParser
-import com.karzek.venues.MainViewModel
+import com.karzek.venues.ui.MainViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.androidx.viewmodel.dsl.viewModel

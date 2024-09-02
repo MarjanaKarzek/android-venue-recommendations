@@ -16,7 +16,7 @@ import com.karzek.restaurants.data.error.VenueSectionNotFound
 
 class RestaurantRepositoryImpl(
   private val api: RestaurantsApi,
-  private val mapper: Mapper<VenueSectionItemDto, com.karzek.domain.restaurants.Restaurant>,
+  private val mapper: Mapper<VenueSectionItemDto, Restaurant>,
   private val dispatcher: DispatcherProvider,
   private val errorEntityFactory: ErrorEntityFactory,
 ) : RestaurantRepository {

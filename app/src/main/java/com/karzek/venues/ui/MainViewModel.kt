@@ -1,12 +1,14 @@
-package com.karzek.venues
+package com.karzek.venues.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
+import com.karzek.core.network.NetworkConnectionError
 import com.karzek.core.result.Result
 import com.karzek.designsystem.R
 import com.karzek.designsystem.card.CardData
 import com.karzek.domain.restaurants.GetRestaurantsUseCase
+import com.karzek.domain.restaurants.NoRestaurantsFoundError
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
@@ -72,6 +74,11 @@ class MainViewModel(
 
   private fun showError(error: ErrorEntity) {
     Timber.e("DATA ERROR", "${error.throwable.message}")
+    when (error) {
+      is NoRestaurantsFoundError -> {}
+      is NetworkConnectionError -> {}
+      else -> {}
+    }
   }
 
 }
