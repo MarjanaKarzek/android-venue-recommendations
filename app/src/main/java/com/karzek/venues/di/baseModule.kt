@@ -5,6 +5,7 @@ import com.karzek.core.error.ErrorEntityFactory
 import com.karzek.core.network.NetworkErrorEntityFactory
 import com.karzek.restaurants.data.api.sectionJsonParser
 import com.karzek.venues.ui.MainViewModel
+import com.karzek.venues.ui.MainViewProvider
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,5 +22,11 @@ val baseModule = module {
       listOf(NetworkErrorEntityFactory)
     )
   }
-  viewModel { MainViewModel(useCase = get(), wishlistRepository = get()) }
+  viewModel {
+    MainViewModel(
+      useCase = get(),
+      wishlistRepository = get(),
+      mainViewProvider = MainViewProvider
+    )
+  }
 }

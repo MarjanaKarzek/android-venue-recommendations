@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       val state = viewModel.viewState.collectAsStateWithLifecycle()
-      MainView(state.value)
+      MainView(state.value.data)
     }
   }
 }
