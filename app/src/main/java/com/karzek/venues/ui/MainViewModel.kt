@@ -49,7 +49,7 @@ class MainViewModel(
         data = data,
         onWishIconClicked = ::onWishIconClicked,
       ),
-      message = null,
+      error = null,
     )
   }
 
@@ -65,11 +65,12 @@ class MainViewModel(
 
   private fun showError(error: ErrorEntity) {
     Timber.e("DATA ERROR", "${error.throwable.message}")
-    when (error) {
-      is NoRestaurantsFoundError -> {}
-      is NetworkConnectionError -> {}
-      else -> {}
+    val message = when (error) {
+      is NoRestaurantsFoundError -> "Currently there are no restaurants available for your location. Keep on moving, we keep searching."
+      is NetworkConnectionError -> "A network error occurred. Check your internet connection while we try again."
+      else -> "Something went wrong but fear not, I already informed an engineer."
     }
+    _viewState.value = _viewState.value.copy(isLoading = false, error = message)
   }
 
 }
