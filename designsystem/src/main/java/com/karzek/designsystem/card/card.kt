@@ -27,7 +27,7 @@ import com.karzek.designsystem.token.SpacingToken.X0_5
 import com.karzek.designsystem.token.SpacingToken.X1
 import com.karzek.designsystem.token.SpacingToken.X3
 
-private const val DESCRIPTION_MAX_LINES: Int = 3
+private const val DESCRIPTION_MAX_LINES: Int = 2
 
 data class CardData(
   val title: String,
@@ -102,6 +102,21 @@ fun CardPreview() {
       title = "Taco Bell Tennispalatsi",
       description = null,
       imageUrl = "",
+      icon = R.drawable.ic_heart_filled,
+      onIconClicked = {},
+    )
+  )
+}
+
+@Preview
+@Composable
+fun CardDescriptionPreview() {
+  Card(
+    CardData(
+      title = "Taco Bell Tennispalatsi",
+      imageUrl = "",
+      description = "This is a long text that shows how the max lines property is used and demonstrates" +
+          " what happens in case the line is too long.",
       icon = R.drawable.ic_heart_filled,
       onIconClicked = {},
     )
