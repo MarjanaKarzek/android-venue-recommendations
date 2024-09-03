@@ -10,6 +10,7 @@ import com.karzek.domain.restaurants.NoRestaurantsFoundError
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
+import com.karzek.designsystem.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -65,12 +66,12 @@ class MainViewModel(
 
   private fun showError(error: ErrorEntity) {
     Timber.e("DATA ERROR", "${error.throwable.message}")
-    val message = when (error) {
-      is NoRestaurantsFoundError -> "Currently there are no restaurants available for your location. Keep on moving, we keep searching."
-      is NetworkConnectionError -> "A network error occurred. Check your internet connection while we try again."
-      else -> "Something went wrong but fear not, I already informed an engineer."
+    val resource = when (error) {
+      is NoRestaurantsFoundError -> R.string.venues_no_restaurants_found_error
+      is NetworkConnectionError -> R.string.app_no_network_error
+      else -> R.string.app_unknown_error
     }
-    _viewState.value = _viewState.value.copy(isLoading = false, error = message)
+    _viewState.value = _viewState.value.copy(isLoading = false, error = resource)
   }
 
 }
