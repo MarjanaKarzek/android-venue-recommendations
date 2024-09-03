@@ -13,38 +13,28 @@ import com.karzek.designsystem.token.SpacingToken.X1
 
 @Composable
 fun Banner(@StringRes messageRes: Int, variant: BannerVariant) {
-  when (variant) {
-    BannerVariant.INFO -> BannerInfo(messageRes)
-    BannerVariant.ERROR -> BannerError(messageRes)
-  }
-}
-
-@Composable
-fun BannerInfo(@StringRes messageRes: Int) {
   Text(
     modifier = Modifier
       .fillMaxWidth()
       .padding(X1)
-      .background(MaterialTheme.colorScheme.surface),
+      .configureBackground(variant),
     text = stringResource(id = messageRes),
     style = MaterialTheme.typography.bodyMedium,
-    color = MaterialTheme.colorScheme.onSurface,
+    color = getTextColor(variant),
   )
 }
 
 @Composable
-fun BannerError(@StringRes messageRes: Int) {
-  Text(
-    modifier = Modifier
-      .fillMaxWidth()
-      .background(MaterialTheme.colorScheme.error)
-      .padding(X1),
-    text = stringResource(id = messageRes),
-    style = MaterialTheme.typography.bodyMedium,
-    color = MaterialTheme.colorScheme.onError,
-  )
+private fun Modifier.configureBackground(variant: BannerVariant) = when (variant) {
+  BannerVariant.INFO -> this.background(MaterialTheme.colorScheme.surface)
+  BannerVariant.ERROR -> this.background(MaterialTheme.colorScheme.error)
 }
 
+@Composable
+private fun getTextColor(variant: BannerVariant) = when (variant) {
+  BannerVariant.INFO -> MaterialTheme.colorScheme.onSurface
+  BannerVariant.ERROR -> MaterialTheme.colorScheme.onError
+}
 
 enum class BannerVariant {
   INFO, ERROR
