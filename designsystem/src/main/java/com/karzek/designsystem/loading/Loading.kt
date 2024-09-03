@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Loading(modifier: Modifier = Modifier) {
   Box(
-    modifier = modifier
-      .background(MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.5f)),
+    modifier = modifier.background(MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.5f)),
     contentAlignment = Alignment.Center,
   ) {
     CircularProgressIndicator(
