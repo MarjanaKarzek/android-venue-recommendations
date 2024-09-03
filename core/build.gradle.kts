@@ -42,6 +42,4 @@ dependencies {
   implementation(libs.moshi.kotlin)
   implementation(libs.moshi.kotlin.codegen)
   implementation(libs.timber)
-  debugImplementation(libs.chucker)
-  releaseImplementation(libs.chucker.no.op)
 }

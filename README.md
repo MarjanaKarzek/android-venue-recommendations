@@ -8,20 +8,23 @@ application the ui for the restaurants would have been moved out of the app modu
 
 ## tech stack
 Kotlin
+Flows
 Koin
+
 Compose
 MVVM
-Flows
 SharedPreferences
 Moshi
 Retrofit
 OkHttp
 Timber
+WorkManager
 
 Paparazzi
 JUnit4 & JUnit5
 MockitoKotlin
 ComposeUI Testing
+MockWebServer
 
 ## Shortcuts
 Since the UI is consisting only of one screen I decided against using a fragment or the Navigation framework.

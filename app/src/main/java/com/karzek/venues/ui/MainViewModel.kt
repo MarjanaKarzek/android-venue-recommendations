@@ -5,12 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.karzek.core.error.ErrorEntity
 import com.karzek.core.network.NetworkConnectionError
 import com.karzek.core.result.Result
+import com.karzek.designsystem.R
 import com.karzek.domain.restaurants.GetRestaurantsUseCase
 import com.karzek.domain.restaurants.NoRestaurantsFoundError
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
-import com.karzek.designsystem.R
+import com.karzek.location.work.LocationNotificationWorkScheduler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -21,6 +22,7 @@ class MainViewModel(
   private val useCase: GetRestaurantsUseCase,
   private val wishlistRepository: WishlistRepository,
   private val mainViewProvider: MainViewProvider,
+  private val workScheduler: LocationNotificationWorkScheduler,
 ) : ViewModel() {
 
   private val _viewState: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState())
@@ -72,6 +74,14 @@ class MainViewModel(
       else -> R.string.app_unknown_error
     }
     _viewState.value = _viewState.value.copy(isLoading = false, error = resource)
+  }
+
+  fun onPause() {
+    workScheduler.scheduleLocationNotification()
+  }
+
+  fun onResume() {
+    workScheduler.cancelAllWork()
   }
 
 }

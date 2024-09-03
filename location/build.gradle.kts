@@ -36,4 +36,6 @@ dependencies {
   implementation(libs.koin.android)
   implementation(libs.koin.core)
   implementation(libs.androidx.core.ktx)
+  implementation(libs.timber)
+  implementation(libs.workManager)
 }

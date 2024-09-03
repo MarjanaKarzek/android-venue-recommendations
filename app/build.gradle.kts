@@ -76,8 +76,7 @@ dependencies {
   implementation(libs.moshi.adapters)
   implementation(libs.moshi.kotlin)
   implementation(libs.timber)
-  debugImplementation(libs.chucker)
-  releaseImplementation(libs.chucker.no.op)
+  implementation(libs.workManager)
 
   testImplementation(libs.junit)
 
