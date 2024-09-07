@@ -36,3 +36,10 @@ Please let me know in case you would like to see me demonstrating usages of the 
 For tests you can find an example of a Screenshot, Integration and Unit test. 
 If the examples are not sufficient I can provide more.
 
+In order to demonstrate how I would implement background work I used an empty Worker as I think its enough
+to showcase how I would implement it. In case you want me to implement more of the logic, let me know please.
+
+For the restaurant endpoint I tried to find a query parameter that would limit the restaurant 
+response but couldn't find any. In a production app I would send the limit to the backend rather than
+filtering 15 items after all were received to respect the users data usage.
+
