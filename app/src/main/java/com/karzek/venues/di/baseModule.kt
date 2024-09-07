@@ -26,7 +26,8 @@ val baseModule = module {
     MainViewModel(
       useCase = get(),
       wishlistRepository = get(),
-      mainViewProvider = MainViewProvider
+      mainViewProvider = MainViewProvider,
+      workScheduler = get(),
     )
   }
 }

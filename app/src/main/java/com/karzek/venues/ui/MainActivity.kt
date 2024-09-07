@@ -47,11 +47,13 @@ class MainActivity : ComponentActivity() {
 
   override fun onPause() {
     super.onPause()
-    viewModel.onPause()
+    viewModel.stopRestaurantFetching()
+    viewModel.scheduleBackgroundWork()
   }
 
   override fun onResume() {
     super.onResume()
-    viewModel.onResume()
+    viewModel.cancelBackgroundWork()
+    viewModel.startRestaurantFetching()
   }
 }

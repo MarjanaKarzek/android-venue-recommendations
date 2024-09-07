@@ -39,9 +39,4 @@ class LocationRepositoryImpl(
     }
   }.flowOn(dispatcherProvider.io)
 
-  override fun getUserLocation(): Location {
-    pointer += 1
-    return locations[pointer % locations.size]
-  }
-
 }

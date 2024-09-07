@@ -12,6 +12,7 @@ import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
 import com.karzek.location.work.LocationNotificationWorkScheduler
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -27,11 +28,25 @@ class MainViewModel(
 
   private val _viewState: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState())
   val viewState: StateFlow<MainViewState> = _viewState
+  private var job: Job? = null
 
-  init {
-    viewModelScope.launch {
+  // handling job manually to respect background execution
+  fun startRestaurantFetching() {
+    job = viewModelScope.launch {
       fetchRestaurants()
     }
+  }
+
+  fun stopRestaurantFetching() {
+    job?.cancel()
+  }
+
+  fun scheduleBackgroundWork() {
+    workScheduler.scheduleLocationNotification()
+  }
+
+  fun cancelBackgroundWork() {
+    workScheduler.cancelAllWork()
   }
 
   private suspend fun fetchRestaurants() {
@@ -41,7 +56,6 @@ class MainViewModel(
         is Result.Error -> showError(result.error)
       }
     }
-
   }
 
   private fun showRestaurants(data: RestaurantOutput) {
@@ -74,14 +88,6 @@ class MainViewModel(
       else -> R.string.app_unknown_error
     }
     _viewState.value = _viewState.value.copy(isLoading = false, error = resource)
-  }
-
-  fun onPause() {
-    workScheduler.scheduleLocationNotification()
-  }
-
-  fun onResume() {
-    workScheduler.cancelAllWork()
   }
 
 }

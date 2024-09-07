@@ -114,7 +114,7 @@ fun CardPreview() {
 
 @Preview
 @Composable
-fun CardDescriptionPreview() {
+private fun CardDescriptionPreview() {
   Card(
     CardData(
       title = "Taco Bell Tennispalatsi",
