@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  *
  * Using OneTimeWorkRequest as the repeating one has a minimum runtime of 15 minutes.
  */
-class LocationNotificationWorker(context: Context, params: WorkerParameters) :
+class LocationWorker(context: Context, params: WorkerParameters) :
   Worker(context, params) {
 
   private val applicationContext: Application by inject(Application::class.java)
@@ -26,7 +26,7 @@ class LocationNotificationWorker(context: Context, params: WorkerParameters) :
   override fun doWork(): Result {
     if (!isAppInForeground()) {
       Timber.d("Worker execution success")
-      // todo fetch the location and for example show a notification to return to app
+      // fetch the location and for example show a notification to return to app
       rescheduleWorker()
     }
     return Result.success()
@@ -34,7 +34,7 @@ class LocationNotificationWorker(context: Context, params: WorkerParameters) :
 
   private fun rescheduleWorker() {
     val workRequest: WorkRequest =
-      OneTimeWorkRequest.Builder(LocationNotificationWorker::class.java)
+      OneTimeWorkRequest.Builder(LocationWorker::class.java)
         .setInitialDelay(10, TimeUnit.SECONDS)
         .build()
 

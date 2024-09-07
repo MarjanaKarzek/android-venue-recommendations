@@ -11,7 +11,7 @@ import com.karzek.domain.restaurants.NoRestaurantsFoundError
 import com.karzek.domain.restaurants.Restaurant
 import com.karzek.domain.restaurants.RestaurantOutput
 import com.karzek.domain.wishlist.WishlistRepository
-import com.karzek.location.work.LocationNotificationWorkScheduler
+import com.karzek.location.work.WorkScheduler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +23,7 @@ class MainViewModel(
   private val useCase: GetRestaurantsUseCase,
   private val wishlistRepository: WishlistRepository,
   private val mainViewProvider: MainViewProvider,
-  private val workScheduler: LocationNotificationWorkScheduler,
+  private val workScheduler: WorkScheduler,
 ) : ViewModel() {
 
   private val _viewState: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState())
@@ -81,7 +81,7 @@ class MainViewModel(
   }
 
   private fun showError(error: ErrorEntity) {
-    Timber.e("DATA ERROR", "${error.throwable.message}")
+    Timber.e(error.throwable, "DATA ERROR - ${error.throwable.message}")
     val resource = when (error) {
       is NoRestaurantsFoundError -> R.string.venues_no_restaurants_found_error
       is NetworkConnectionError -> R.string.app_no_network_error

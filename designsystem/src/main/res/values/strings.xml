@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Venue Recommendations</string>
-    <string name="venues_no_restaurants_found_error">"Currently there are no restaurants available for your location. Keep on moving, we keep searching."</string>
-    <string name="app_no_network_error">"A network error occurred. Check your internet connection while we try again."</string>
-    <string name="app_unknown_error">"Something went wrong but fear not, I already informed an engineer."</string>
+    <string name="venues_no_restaurants_found_error">Currently there are no restaurants available for your location. Keep on moving, we keep searching.</string>
+    <string name="app_no_network_error">A network error occurred. Check your internet connection while we try again.</string>
+    <string name="app_unknown_error">Something went wrong but fear not, I already informed an engineer.</string>
 </resources>

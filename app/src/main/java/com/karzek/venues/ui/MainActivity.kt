@@ -9,12 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
 import com.karzek.designsystem.loading.Loading
 import com.karzek.designsystem.theme.AppTheme
-import com.karzek.location.work.LocationNotificationWorker
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {

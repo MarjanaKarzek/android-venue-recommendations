@@ -5,15 +5,15 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 
-class LocationNotificationWorkScheduler(private val context: Context) {
-  fun scheduleLocationNotification() {
-    val workRequest: WorkRequest = OneTimeWorkRequest.Builder(LocationNotificationWorker::class.java)
+class LocationWorkScheduler(private val context: Context) : WorkScheduler {
+  override fun scheduleLocationNotification() {
+    val workRequest: WorkRequest = OneTimeWorkRequest.Builder(LocationWorker::class.java)
       .build()
 
     WorkManager.getInstance(context).enqueue(workRequest)
   }
 
-  fun cancelAllWork() {
+  override fun cancelAllWork() {
     WorkManager.getInstance(context).cancelAllWork()
   }
 }

@@ -2,6 +2,7 @@ package com.karzek.designsystem.banner
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -13,15 +14,20 @@ import com.karzek.designsystem.token.SpacingToken.X1
 
 @Composable
 fun Banner(@StringRes messageRes: Int, variant: BannerVariant) {
-  Text(
+  Box(
     modifier = Modifier
       .fillMaxWidth()
-      .padding(X1)
       .configureBackground(variant),
-    text = stringResource(id = messageRes),
-    style = MaterialTheme.typography.bodyMedium,
-    color = getTextColor(variant),
-  )
+  ) {
+    Text(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(X1),
+      text = stringResource(id = messageRes),
+      style = MaterialTheme.typography.bodyMedium,
+      color = getTextColor(variant),
+    )
+  }
 }
 
 @Composable
