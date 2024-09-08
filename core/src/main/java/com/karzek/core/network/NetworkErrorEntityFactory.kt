@@ -1,7 +1,7 @@
 package com.karzek.core.network
 
 import android.view.inputmethod.TextBoundsInfoResult.CODE_CANCELLED
-import com.karzek.core.error.ModuleErrorEntityFactory
+import com.karzek.core.error.FeatureErrorEntityFactory
 import okhttp3.internal.http2.ConnectionShutdownException
 import okhttp3.internal.http2.StreamResetException
 import retrofit2.HttpException
@@ -17,7 +17,7 @@ import javax.net.ssl.SSLException
 import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLPeerUnverifiedException
 
-object NetworkErrorEntityFactory : ModuleErrorEntityFactory {
+object NetworkErrorEntityFactory : FeatureErrorEntityFactory {
 
   override fun toError(throwable: Throwable) = when {
     throwable.isBadConnection() -> NetworkConnectionError(throwable)

@@ -1,10 +1,8 @@
 package com.karzek.restaurants.data
 
 import com.karzek.core.coroutines.DispatcherProvider
-import com.karzek.core.error.ComposedErrorEntityFactory
 import com.karzek.core.error.ErrorEntityFactory
 import com.karzek.core.mapper.Mapper
-import com.karzek.core.network.NetworkErrorEntityFactory
 import com.karzek.core.result.Result
 import com.karzek.domain.restaurants.NoRestaurantsFoundError
 import com.karzek.domain.restaurants.Restaurant
@@ -12,7 +10,8 @@ import com.karzek.domain.restaurants.RestaurantRepository
 import com.karzek.domain.restaurants.VenueSectionNotFoundError
 import com.karzek.restaurants.data.api.RestaurantPageDto.VenueSectionItemDto
 import com.karzek.restaurants.data.api.RestaurantsApi
-import com.karzek.restaurants.data.error.RestaurantsErrorEntityFactory
+import com.karzek.restaurants.data.error.RestaurantsNotFound
+import com.karzek.restaurants.data.error.VenueSectionNotFound
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
@@ -29,12 +28,7 @@ class RestaurantRepositoryImplTest {
   private val api: RestaurantsApi = mock()
   private val mapper: Mapper<VenueSectionItemDto, Restaurant> = mock()
   private val dispatcher: DispatcherProvider = TestDispatcherProvider()
-  private val errorEntityFactory: ErrorEntityFactory = ComposedErrorEntityFactory(
-    listOf(
-      RestaurantsErrorEntityFactory(),
-      NetworkErrorEntityFactory,
-    )
-  )
+  private val errorEntityFactory: ErrorEntityFactory = mock()
 
   private val repository: RestaurantRepository = RestaurantRepositoryImpl(
     api = api,
@@ -70,6 +64,9 @@ class RestaurantRepositoryImplTest {
           testLongitude
         )
       ) doReturn testRestaurantPageDtoNoVenues
+      whenever(errorEntityFactory.toError(any())) doReturn VenueSectionNotFoundError(
+        VenueSectionNotFound()
+      )
 
       val result = repository.getRestaurants(testLatitude, testLongitude, testLimit)
 
@@ -87,6 +84,9 @@ class RestaurantRepositoryImplTest {
           testLongitude
         )
       ) doReturn testRestaurantPageDtoNoRestaurants
+      whenever(errorEntityFactory.toError(any())) doReturn NoRestaurantsFoundError(
+        RestaurantsNotFound()
+      )
 
       val result = repository.getRestaurants(testLatitude, testLongitude, testLimit)
 

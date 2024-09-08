@@ -4,6 +4,6 @@ interface ErrorEntityFactory {
   fun toError(throwable: Throwable): ErrorEntity
 }
 
-interface ModuleErrorEntityFactory {
+interface FeatureErrorEntityFactory {
   fun toError(throwable: Throwable): ErrorEntity?
 }

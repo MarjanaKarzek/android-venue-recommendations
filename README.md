@@ -31,7 +31,7 @@ For tests you can find an example of a Screenshot, Integration and Unit test.
 If the examples are not sufficient I can provide more.
 
 Screenshot: IconButtonScreenshotTest
-Unit: RestaurantRepositoryImplTest
+Unit: RestaurantRepositoryImplTest, RestaurantErrorEntityFactoryTest
 Integration: VenuesIntegrationTest
 
 ## Shortcuts
